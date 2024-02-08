@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Same as 2.28
 int main() {
    long long phoneNumber;
 
