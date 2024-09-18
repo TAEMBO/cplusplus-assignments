@@ -33,7 +33,9 @@ int main() {
                 if (action == 'i') {
                     stack.push(data);
                 } else {
-                    if (stack.top() == data) {
+                    if (stack.empty()) {
+                        failed = true;
+                    } else if (stack.top() == data) {
                         stack.pop();
                     } else {
                         failed = true;
