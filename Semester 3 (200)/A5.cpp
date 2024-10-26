@@ -11,6 +11,9 @@ class Newstring {
         char data[STRING_CHAR_SIZE];
         int size;
     public:
+        Newstring() {
+            size = 0;
+        }
         Newstring(const char chars[]) {
             int countedChars = 0;
             int charLimit = strlen(chars) > STRING_CHAR_SIZE ? STRING_CHAR_SIZE : strlen(chars);
@@ -78,7 +81,7 @@ class Newstring {
         bool operator==(const char chars[]) {
             bool equals = true;
 
-            for (int i = 0; i < strlen(chars); i++) {
+            for (int i = 0; i < static_cast<int>(strlen(chars)); i++) {
                 if (data[i] != chars[i]) {
                     equals = false;
 
@@ -92,25 +95,27 @@ class Newstring {
         int length() {
             return size;
         };
+
+        friend ostream& operator<<(ostream &os, Newstring string) {
+            for (int i = 0; i < string.length(); i++) cout << string[i];
+
+            return os;
+        }
 };
 
-ostream& operator<<(ostream &os, Newstring* string) {
-    for (int i = 0; i < string->length(); i++) cout << (*string)[i];
-
-    return os;
-}
-
 int main() {
+    Newstring n;
     Newstring str1 = 69;
     Newstring str2 = "Test";
     Newstring str3 = str2 = str1;
 
     cout
+        << n << endl
         << (str3 == str2) << endl
         << (str3 == "69") << endl
         << str3.length() << endl
         << str3[1] << endl
-        << &str3 << endl;
+        << str3 << endl;
 
     return 0;
 }
